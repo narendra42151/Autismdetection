@@ -363,17 +363,16 @@ class HomePage extends StatelessWidget {
           'Take Photo',
           Icons.camera_alt_rounded,
           isWeb ? Colors.blue : Theme.of(context).primaryColor,
-          () => provider.pickImage(ImageSource.camera),
+          () {}, // Empty function as we'll handle it inside _buildImageSourceButton
         ),
         _buildImageSourceButton(
           context,
           'Choose from Gallery',
           Icons.photo_library_rounded,
           isWeb ? Colors.blue : Theme.of(context).primaryColor,
-          () => provider.pickImage(ImageSource.gallery),
+          () {}, // Empty function as we'll handle it inside _buildImageSourceButton
         ),
-        if (provider.hasImage && !provider.isLoading && !provider.hasResult)
-          _buildAnalysisButton(provider, context),
+        // Remove the analyze button as it's no longer needed
       ],
     );
   }
@@ -443,7 +442,22 @@ class HomePage extends StatelessWidget {
         side: BorderSide(color: color),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      onPressed: onPressed,
+      onPressed: () async {
+        final provider = Provider.of<AutismDetectorProvider>(
+          context,
+          listen: false,
+        );
+        await provider.pickImage(
+          icon == Icons.camera_alt_rounded
+              ? ImageSource.camera
+              : ImageSource.gallery,
+        );
+
+        // Automatically analyze the image after selection
+        if (provider.hasImage) {
+          provider.analyzeImage();
+        }
+      },
     );
   }
 
