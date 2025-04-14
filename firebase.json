@@ -1,0 +1,39 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "autismdetection-86fc0",
+          "appId": "1:1030055158509:android:d362b5269d3626564862e4",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "autismdetection-86fc0",
+          "configurations": {
+            "android": "1:1030055158509:android:d362b5269d3626564862e4",
+            "ios": "1:1030055158509:ios:7c50aed17689f5d24862e4",
+            "macos": "1:1030055158509:ios:7c50aed17689f5d24862e4",
+            "web": "1:1030055158509:web:e1bec29c2fd8807e4862e4",
+            "windows": "1:1030055158509:web:de4cef6bc1b9cc7c4862e4"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
